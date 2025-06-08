@@ -1,0 +1,136 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f7f9fc;
+}
+
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* full screen above fold */
+}
+
+.form-container {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  transition: all 0.3s ease;
+}
+
+.form-field {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  margin-bottom: 20px;
+}
+
+.form-field.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.form-field.completed {
+  opacity: 1;
+  transform: translateY(-10px);
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: left;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 12px; /* match button */
+  border: 2px solid #ddd;
+  border-radius: 8px; /* match button rounded look */
+  font-size: 16px;
+  transition: border 0.3s ease;
+  box-sizing: border-box; /* IMPORTANT */
+}
+
+input[type="text"]:focus {
+  border-color: #f95c67;
+  outline: 1px solid #f95c67;
+}
+
+.error {
+  color: #e74c3c;
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+.next-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #f95c67;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-sizing: border-box; /* match input */
+}
+
+.next-button:hover {
+  background-color: #e14e5a;
+}
+
+/* Shake Animation */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+input.shake {
+  animation: shake 0.5s;
+}
+
+/* Summary view */
+.summary-view {
+  text-align: left;
+}
+
+.summary-field {
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.summary-buttons {
+  margin-top: 20px;
+}
+
+.summary-buttons button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background-color: #28a745;
+  color: white;
+  margin-right: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.summary-buttons button:hover {
+  background-color: #218838;
+}
+
+.summary-buttons button:nth-child(2) {
+  background-color: #ffc107;
+}
+
+.summary-buttons button:nth-child(2):hover {
+  background-color: #e0a800;
+}
