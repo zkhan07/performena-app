@@ -1,31 +1,49 @@
-body {
+/* Reset and global styles */
+body, html {
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
   background-color: #f7f9fc;
+  height: 100vh;
+  overflow: hidden;
 }
 
+/* App container full screen centered */
 .app-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* full screen above fold */
+  height: 100vh;
 }
 
+/* Form container */
 .form-container {
-  background: white;
+ background: white;
   padding: 40px;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   width: 400px;
+  max-height: 90vh; /* important: limit height */
+  overflow-y: auto; /* allow vertical scroll */
   transition: all 0.3s ease;
+  box-sizing: border-box;
 }
 
+@media (max-width: 480px) {
+  .form-container {
+    width: 90%;
+    padding: 20px;
+    max-height: 90vh; /* still scrollable */
+    overflow-y: auto;
+  }
+}
+
+/* Form field */
 .form-field {
+  margin-bottom: 20px;
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  margin-bottom: 20px;
+  transition: all 0.5s ease;
 }
 
 .form-field.active {
@@ -42,49 +60,29 @@ label {
   display: block;
   margin-bottom: 8px;
   font-weight: bold;
-  font-size: 16px;
-  text-align: left;
+  font-size: 18px;
+  color: #333;
+  text-align: center;
 }
 
+/* Input */
 input[type="text"] {
   width: 100%;
-  padding: 12px; /* match button */
-  border: 2px solid #ddd;
-  border-radius: 8px; /* match button rounded look */
+  padding: 12px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
   font-size: 16px;
-  transition: border 0.3s ease;
-  box-sizing: border-box; /* IMPORTANT */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
 }
 
 input[type="text"]:focus {
-  border-color: #f95c67;
-  outline: 1px solid #f95c67;
+  border-color: #f95c67; /* Pink border on focus */
+  box-shadow: 0 0 5px rgba(249, 92, 103, 0.6);
+  outline: none;
 }
 
-.error {
-  color: #e74c3c;
-  font-size: 14px;
-  margin-top: 6px;
-}
-
-.next-button {
-  width: 100%;
-  padding: 12px;
-  background-color: #f95c67;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  box-sizing: border-box; /* match input */
-}
-
-.next-button:hover {
-  background-color: #e14e5a;
-}
-
-/* Shake Animation */
+/* Shake animation */
 @keyframes shake {
   0% { transform: translateX(0); }
   25% { transform: translateX(-5px); }
@@ -97,6 +95,33 @@ input.shake {
   animation: shake 0.5s;
 }
 
+/* Error */
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+/* Button */
+.next-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #f95c67;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+
+.next-button:hover {
+  background-color: #e14e5a;
+}
+
 /* Summary view */
 .summary-view {
   text-align: left;
@@ -107,30 +132,58 @@ input.shake {
   font-size: 16px;
 }
 
+.summary-field strong {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+.summary-field input[type="text"] {
+  margin-top: 5px;
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #f95c67;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+/* Summary buttons */
 .summary-buttons {
   margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .summary-buttons button {
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  background-color: #28a745;
+  flex: 1;
+  padding: 12px;
+  background-color: #f95c67;
   color: white;
-  margin-right: 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .summary-buttons button:hover {
-  background-color: #218838;
+  background-color: #e14e5a;
 }
 
-.summary-buttons button:nth-child(2) {
-  background-color: #ffc107;
+/* Final message */
+.final-message {
+  text-align: center;
 }
 
-.summary-buttons button:nth-child(2):hover {
-  background-color: #e0a800;
+.final-message h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.final-message .summary-field {
+  text-align: left;
+  font-size: 16px;
 }

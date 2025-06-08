@@ -62,6 +62,7 @@ const RegistrationForm = () => {
   const [shake, setShake] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [isFinalSubmitted, setIsFinalSubmitted] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -99,6 +100,7 @@ const RegistrationForm = () => {
         } else {
           // First submission
           setIsSubmitted(true);
+          alert("Form submitted successfully!"); // ✅ show notification
         }
       }
     }
@@ -150,29 +152,51 @@ const RegistrationForm = () => {
         </>
       ) : (
         <div className="summary-view">
-          <h3>Registration Summary</h3>
-          {fieldConfigs.map((field) => (
-            <div key={field.name} className="summary-field">
-              <strong>{field.label}:</strong>{" "}
-              {isEditMode ? (
-                <input
-                  type="text"
-                  name={field.name}
-                  value={formData[field.name]}
-                  onChange={handleInputChange}
-                />
-              ) : (
-                <span>{formData[field.name]}</span>
-              )}
-            </div>
-          ))}
-          <div className="summary-buttons">
-            {isEditMode ? (
-              <button onClick={handleSave}>Save</button>
+          <>
+            {isFinalSubmitted ? (
+              <div className="final-message">
+                <h2>Thank you! Your form has been submitted.</h2>
+                {fieldConfigs.map((field) => (
+                  <div key={field.name} className="summary-field">
+                    <strong>{field.label}:</strong> {formData[field.name]}
+                  </div>
+                ))}
+              </div>
             ) : (
-              <button onClick={handleEdit}>Edit</button>
+              <>
+                <h3>Registration Summary</h3>
+                {fieldConfigs.map((field) => (
+                  <div key={field.name} className="summary-field">
+                    <strong>{field.label}:</strong>{" "}
+                    {isEditMode ? (
+                      <input
+                        type="text"
+                        name={field.name}
+                        value={formData[field.name]}
+                        onChange={handleInputChange}
+                      />
+                    ) : (
+                      <span>{formData[field.name]}</span>
+                    )}
+                  </div>
+                ))}
+                <div className="summary-buttons">
+                  {!isFinalSubmitted && (
+                    <>
+                      {isEditMode ? (
+                        <button onClick={handleSave}>Save</button>
+                      ) : (
+                        <button onClick={handleEdit}>Edit</button>
+                      )}
+                      <button onClick={() => setIsFinalSubmitted(true)}>
+                        Final Submit
+                      </button>
+                    </>
+                  )}
+                </div>
+              </>
             )}
-          </div>
+          </>
         </div>
       )}
     </div>
